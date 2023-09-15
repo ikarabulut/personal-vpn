@@ -1,5 +1,5 @@
-dev/.terraform
-dev/.terraform.lock.hcl
-dev/*.pem
-global/.terraform
-global/.terraform.lock.hcl
+terraform/.terraform
+terraform/.terraform.lock.hcl
+terraform/*.pem
+backend/.terraform
+backend/.terraform.lock.hcl

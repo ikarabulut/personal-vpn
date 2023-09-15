@@ -38,6 +38,7 @@ resource "aws_instance" "web" {
   key_name      = aws_key_pair.myKeyPair.key_name
   vpc_security_group_ids = [aws_security_group.SshSG.id]
 
+  subnet_id = "subnet-00084671f7a4e7538"
 
   tags = {
     Name = "personal-vpn-instance"
@@ -63,6 +64,7 @@ resource "local_file" "myLabKeyPairFile" {
 resource "aws_security_group" "SshSG" {
     name        = "sshSG"
     description = "Allow ssh"
+    vpc_id = "vpc-0018812477372bf42"
     
     ingress {
         from_port   = "22"
@@ -71,7 +73,21 @@ resource "aws_security_group" "SshSG" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-        egress {
+    ingress {
+        from_port   = "22"
+        to_port     = "22"
+        protocol    = "UDP"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        from_port   = "51820"
+        to_port     = "51820"
+        protocol    = "UDP"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
         from_port   = 0
         to_port     = 0
         protocol    = "-1"
