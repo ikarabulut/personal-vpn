@@ -1,11 +1,8 @@
 terraform {
   backend "s3" {
-    bucket         = "personal-vpn-backend"
+    bucket         = "personal-vpn-backend-23443"
     key            = "dev/terraform.tfstate"
     region         = "us-east-1"
-
-    dynamodb_table = "personal-vpn-locks"
-    encrypt        = true
   }
 
   required_providers {
@@ -38,7 +35,7 @@ resource "aws_instance" "web" {
   key_name      = aws_key_pair.myKeyPair.key_name
   vpc_security_group_ids = [aws_security_group.SshSG.id]
 
-  subnet_id = "subnet-00084671f7a4e7538"
+  subnet_id = "subnet-075cb47c7e19c667b"
 
   tags = {
     Name = "personal-vpn-instance"
@@ -64,7 +61,7 @@ resource "local_file" "myLabKeyPairFile" {
 resource "aws_security_group" "SshSG" {
     name        = "sshSG"
     description = "Allow ssh"
-    vpc_id = "vpc-0018812477372bf42"
+    vpc_id = "vpc-0e6f8544bc29043b5"
     
     ingress {
         from_port   = "22"
